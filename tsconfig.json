@@ -18,8 +18,11 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true
   },
+  "ts-node": {
+    "experimentalSpecifierResolution": "node"
+  },
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
