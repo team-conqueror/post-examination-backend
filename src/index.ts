@@ -1,16 +1,25 @@
-import express, {Express, Request, Response} from 'express';
-import dotenv from 'dotenv';
+import {ApolloServer} from '@apollo/server';
+import {startStandaloneServer} from '@apollo/server/standalone';
 
 
-dotenv.config();
+// Construct a schema, using GraphQL schema language
+const typeDefs = `#graphql
+  type Query {
+    hello: String
+  }
+`;
 
-const app: Express = express();
-const port = process.env.PORT;
+// Provide resolver functions for your schema fields
+const resolvers = {
+    Query: {
+        hello: () => 'Hello world! 1',
+    },
+};
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Express + TypeScript Server done test');
+const server = new ApolloServer({typeDefs, resolvers});
+
+const {url} = await startStandaloneServer(server, {
+    listen: {port: 4000},
 });
 
-app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+console.log(`🚀  Server ready at: ${url}`);
