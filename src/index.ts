@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 import {ApolloServer} from '@apollo/server';
 import {startStandaloneServer} from '@apollo/server/standalone';
-import {connectDB} from "./db_client/connection";
+import {connectDBInstance} from "./db_client/connection";
 
 
 
@@ -20,7 +20,7 @@ const typeDefs = `#graphql
 // Provide resolver functions for your schema fields
 const resolvers = {
     Query: {
-        hello: () => 'Hello world! 3',
+        hello: () => 'Hello world! 4',
     },
 };
 
@@ -34,7 +34,7 @@ console.log(`🚀  Server ready at: ${url}`);
 
 
 
-const pool = connectDB();
+const pool = connectDBInstance();
 
 async function insertData() {
     const [name, color] = ["blue", "red"];
@@ -50,4 +50,19 @@ async function insertData() {
     console.log(name, color);
 }
 
-insertData().then(r => console.log('done inserting'))
+// insertData().then(r => console.log('done inserting'))
+
+
+async function retrieveData() {
+    try {
+        const res = await (await pool).query("SELECT * FROM shark");
+        console.log(res.rows);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+retrieveData().then(r => console.log('done querying '))
+
+

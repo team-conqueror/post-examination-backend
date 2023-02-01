@@ -1,7 +1,7 @@
 import pkg from 'pg';
 
 const { Pool } = pkg;
-export const connectDB = async () => {
+export const connectDBInstance = async () => {
 
     return new Pool({
         user: 'neminda',
