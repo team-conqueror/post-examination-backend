@@ -8,7 +8,6 @@ export const typeDef = `#graphql
         userId: String!
         postId: String!
         body: String!
-        
     }
 
 `;
