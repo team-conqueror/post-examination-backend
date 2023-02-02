@@ -1,4 +1,5 @@
 import {resolveId} from "../resolvers/resolvers";
+import {dbIdToNodeId} from "../../helpers/resolveId";
 
 export const typeDef = `#graphql
 
@@ -15,6 +16,8 @@ type Comment implements Node {
 export const resolvers = {
 
     Comment: {
-        id: resolveId
+        id: resolveId,
+        userId: (source: any) => dbIdToNodeId(source.userId, 'users'),
+        postId: (source: any) => dbIdToNodeId(source.postId, 'posts')
     }
 };

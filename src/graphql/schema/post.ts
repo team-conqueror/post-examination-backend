@@ -1,10 +1,5 @@
 import {resolveId} from "../resolvers/resolvers";
-import {
-    getAnswersForPostId,
-    getCommentsForPostId,
-    getNodeById,
-    getVoteCountForDocument
-} from "../../db_client/transactions/loaders";
+import {getAnswersForPostId, getCommentsForPostId, getVoteCountForDocument} from "../../db_client/transactions/loaders";
 import {dbIdToNodeId} from "../../helpers/resolveId";
 import {queryResultReducer} from "../reducers/reducer";
 
@@ -33,6 +28,7 @@ export const resolvers = {
                 return queryResultReducer(answerRow)
             });
         },
+        userId: (source: any) => dbIdToNodeId(source.userId, 'users'),
         comments: async (source: any) => {
             const commentRows = await getCommentsForPostId(source.id);
             return commentRows.map((commentRow: any) => {
