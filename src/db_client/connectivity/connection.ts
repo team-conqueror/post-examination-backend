@@ -11,9 +11,9 @@ export const client = new Client({
 });
 
 
-export const runQuery = async (query: QueryConfig) => {
+export const runQuery = async (query: QueryConfig, params: any = []) => {
     try {
-        return await client.query(query);
+        return await client.query(query, params);
     } catch (err) {
         console.error(err);
     }
