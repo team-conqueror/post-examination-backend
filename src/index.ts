@@ -8,7 +8,13 @@ import {ApolloServerPluginDrainHttpServer} from "@apollo/server/plugin/drainHttp
 import {expressMiddleware} from "@apollo/server/express4";
 import pkg from 'body-parser';
 import {client, runQuery} from "./db_client/connectivity/connection";
-import {setSearchPathQuery} from "./db_client/queries/config";
+import {
+    createUserTableQuery,
+    insertDataInToUsersQuery,
+    createPostTableQuery,
+    insertDataInToPostsQuery,
+    setSearchPathQuery
+} from "./db_client/queries/config";
 import {schema} from "./graphql";
 
 const { json } = pkg;
@@ -43,6 +49,14 @@ await client.connect();
 
 // await runQuery(createSchemaQuery);
 await runQuery(setSearchPathQuery);
-// await runQuery(createTableQuery);
-// await runQuery(insertDataQuery);
+
+// users table
+
+// await runQuery(createUserTableQuery);
+// await runQuery(insertDataInToUsersQuery);
+
+// posts table
+
+// await runQuery(createPostTableQuery);
+// await runQuery(insertDataInToPostsQuery);
 
