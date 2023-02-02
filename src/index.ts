@@ -19,6 +19,7 @@ import {
 } from "./db_client/queries/config/posts";
 import {schema} from "./graphql";
 import {createAnswerTableQuery, insertDataInToAnswersQuery} from "./db_client/queries/config/answers";
+import {createCommentTableQuery, insertDataInToCommentsQuery} from "./db_client/queries/config/comments";
 
 
 const { json } = pkg;
@@ -68,3 +69,8 @@ await runQuery(setSearchPathQuery);
 // await runQuery(createAnswerTableQuery);
 // await runQuery(insertDataInToAnswersQuery);
 
+
+// comments table
+
+// await runQuery(createCommentTableQuery);
+// await runQuery(insertDataInToCommentsQuery);

@@ -15,6 +15,8 @@ export const resolver = {
                 return 'Post'
             } else if (source.__tableName === 'answers') {
                 return 'Answer'
+            } else if (source.__tableName === 'comments') {
+                return 'Comment'
             }
                 return null; // GraphQLError is thrown
         },

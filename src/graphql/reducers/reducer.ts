@@ -9,6 +9,8 @@ export const queryResultReducer = (result: NodeByIdReturnType) => {
         graphNode = postReducer(result)
     } else if (result.__tableName === 'answers') {
         graphNode = answerReducer(result)
+    } else if (result.__tableName === 'comments') {
+        graphNode = commentReducer(result)
     }
     return graphNode;
 }
@@ -57,6 +59,26 @@ export const answerReducer = (result: any): NodeByIdReturnType => {
     return result ?
         {
             id: result.row.answer_id,
+            creationDate: result.row.creation_date,
+            userId: result.row.user_id,
+            postId: result.row.post_id,
+            body: result.row.body,
+            __tableName: result.__tableName
+        } :
+        {
+            id: '',
+            creationDate: '',
+            body: '',
+            title: '',
+            userId: '',
+            __tableName: ''
+        };
+}
+
+export const commentReducer = (result: any): NodeByIdReturnType => {
+    return result ?
+        {
+            id: result.row.comment_id,
             creationDate: result.row.creation_date,
             userId: result.row.user_id,
             postId: result.row.post_id,
