@@ -1,5 +1,5 @@
 import {runQuery} from "../connectivity/connection";
-import {selectAllDataQuery, selectUserByIdQuery} from "../queries/read";
+import {selectAllDataQuery, selectPostByIdQuery, selectUserByIdQuery} from "../queries/read";
 import {UserType} from "../../types/userType";
 import {QueryResult} from "pg";
 import {splitNodeId} from "../../helpers/resolveId";
@@ -21,6 +21,14 @@ export const getNodeById = async (nodeId: string) => {
 
     }
     else if (tableName === 'posts') {
+
+        return runQuery(selectPostByIdQuery, [dbId])
+            .then((result) => {
+                return {
+                    __tableName: tableName,
+                    row: result?.rows[0]
+                };
+            })
 
     }
 

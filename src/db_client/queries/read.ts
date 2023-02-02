@@ -9,5 +9,5 @@ export const selectUserByIdQuery = {
 
 // table: posts
 export const selectPostByIdQuery = {
-    test: `SELECT * FROM posts WHERE post_id = $1;`
+    text: `SELECT * FROM posts WHERE post_id = $1;`
 }
