@@ -2,7 +2,7 @@ import {runQuery} from "../connectivity/connection";
 import {UserType} from "../../types/userType";
 import {QueryResult} from "pg";
 import {splitNodeId} from "../../helpers/resolveId";
-import {selectPostByIdQuery} from "../queries/read/posts";
+import {selectAllPostsQuery, selectPostByIdQuery} from "../queries/read/posts";
 import {selectAllDataQuery, selectUserByIdQuery} from "../queries/read/users";
 import {selectAnswerByIdQuery, selectAnswersByPostIdQuery} from "../queries/read/answers";
 import {selectCommentByIdQuery, selectCommentByPostIdQuery} from "../queries/read/comments";
@@ -81,12 +81,22 @@ export const getVoteCountForDocument = async (documentType: string, documentId: 
         });
     const downVotes = await runQuery(selectVoteTypeByDocumentIdQuery, [documentType, documentId, 'down_vote'])
         .then((result: any) => {
-        return result?.rows[0].count;
-    });
+            return result?.rows[0].count;
+        });
     return upVotes - downVotes
 
 }
 
+
+export const getAllPosts = async (): Promise<any> => {
+    const posts = await runQuery(selectAllPostsQuery)
+    return posts?.rows.map((row: any) => {
+        return {
+            __tableName: 'posts',
+            row: row
+        };
+    });
+}
 export const getAllUsers = async (): Promise<QueryResult<UserType> | any> => {
 
     const users = await runQuery(selectAllDataQuery);
