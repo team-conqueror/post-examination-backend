@@ -16,11 +16,5 @@ export const resolvers = {
 
     Post: {
         id: resolveId
-        // users: async (_: null): Promise<UserType[]> => {
-        //     const users = await getAllUsers();
-        //     return users.map((user: UserSchemaType) => {
-        //         return userReducer(user);
-        //     });
-        // },
     }
 };
