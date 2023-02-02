@@ -20,6 +20,11 @@ import {
 import {schema} from "./graphql";
 import {createAnswerTableQuery, insertDataInToAnswersQuery} from "./db_client/queries/config/answers";
 import {createCommentTableQuery, insertDataInToCommentsQuery} from "./db_client/queries/config/comments";
+import {
+    createVoteTableEnumsQuery,
+    createVoteTableQuery,
+    insertDataInToVotesQuery
+} from "./db_client/queries/config/votes";
 
 
 const { json } = pkg;
@@ -74,3 +79,9 @@ await runQuery(setSearchPathQuery);
 
 // await runQuery(createCommentTableQuery);
 // await runQuery(insertDataInToCommentsQuery);
+
+// votes table
+
+// await runQuery(createVoteTableEnumsQuery);
+// await runQuery(createVoteTableQuery);
+// await runQuery(insertDataInToVotesQuery);

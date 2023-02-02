@@ -1,5 +1,10 @@
 import {resolveId} from "../resolvers/resolvers";
-import {getAnswersForPostId, getCommentsForPostId, getNodeById} from "../../db_client/transactions/loaders";
+import {
+    getAnswersForPostId,
+    getCommentsForPostId,
+    getNodeById,
+    getVoteCountForDocument
+} from "../../db_client/transactions/loaders";
 import {dbIdToNodeId} from "../../helpers/resolveId";
 import {queryResultReducer} from "../reducers/reducer";
 
@@ -13,6 +18,7 @@ export const typeDef = `#graphql
         userId: String!
         answers: [Node]
         comments: [Node]
+        votes: Int!
     }
 
 `;
@@ -32,6 +38,9 @@ export const resolvers = {
             return commentRows.map((commentRow: any) => {
                 return queryResultReducer(commentRow)
             });
+        },
+        votes: async (source: any, _: any, contextValue: any) => {
+            return await getVoteCountForDocument('post', source.id)
         }
     }
 };

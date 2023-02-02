@@ -6,6 +6,7 @@ import {selectPostByIdQuery} from "../queries/read/posts";
 import {selectAllDataQuery, selectUserByIdQuery} from "../queries/read/users";
 import {selectAnswerByIdQuery, selectAnswersByPostIdQuery} from "../queries/read/answers";
 import {selectCommentByIdQuery, selectCommentByPostIdQuery} from "../queries/read/comments";
+import {selectVoteTypeByDocumentIdQuery} from "../queries/read/votes";
 
 
 export const getNodeById = async (nodeId: string) => {
@@ -20,8 +21,7 @@ export const getNodeById = async (nodeId: string) => {
                     row: result?.rows[0]
                 };
             })
-    }
-    else if (tableName === 'posts') {
+    } else if (tableName === 'posts') {
         return runQuery(selectPostByIdQuery, [dbId])
             .then((result) => {
                 return {
@@ -50,7 +50,7 @@ export const getNodeById = async (nodeId: string) => {
 }
 
 
-export const getAnswersForPostId = async (postId: string): Promise<QueryResult<UserType>|any> => {
+export const getAnswersForPostId = async (postId: string): Promise<QueryResult<UserType> | any> => {
 
     const answers = await runQuery(selectAnswersByPostIdQuery, [postId]);
     return answers?.rows.map((row: any) => {
@@ -62,7 +62,7 @@ export const getAnswersForPostId = async (postId: string): Promise<QueryResult<U
 
 }
 
-export const getCommentsForPostId = async (postId: string): Promise<QueryResult<UserType>|any> => {
+export const getCommentsForPostId = async (postId: string): Promise<QueryResult<UserType> | any> => {
 
     const answers = await runQuery(selectCommentByPostIdQuery, [postId]);
     return answers?.rows.map((row: any) => {
@@ -74,7 +74,20 @@ export const getCommentsForPostId = async (postId: string): Promise<QueryResult<
 
 }
 
-export const getAllUsers = async (): Promise<QueryResult<UserType>|any> => {
+export const getVoteCountForDocument = async (documentType: string, documentId: string): Promise<any> => {
+    const upVotes = await runQuery(selectVoteTypeByDocumentIdQuery, [documentType, documentId, 'up_vote'])
+        .then((result: any) => {
+            return result?.rows[0].count;
+        });
+    const downVotes = await runQuery(selectVoteTypeByDocumentIdQuery, [documentType, documentId, 'down_vote'])
+        .then((result: any) => {
+        return result?.rows[0].count;
+    });
+    return upVotes - downVotes
+
+}
+
+export const getAllUsers = async (): Promise<QueryResult<UserType> | any> => {
 
     const users = await runQuery(selectAllDataQuery);
     return users?.rows
