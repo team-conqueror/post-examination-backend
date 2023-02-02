@@ -3,7 +3,6 @@ import {selectAllDataQuery, selectUserByIdQuery} from "../queries/read";
 import {UserType} from "../../types/userType";
 import {QueryResult} from "pg";
 import {splitNodeId} from "../../helpers/resolveId";
-import {result} from "lodash";
 
 
 export const getNodeById = async (nodeId: string) => {
@@ -12,15 +11,16 @@ export const getNodeById = async (nodeId: string) => {
 
     if (tableName === 'users') {
 
-        const user = runQuery(selectUserByIdQuery, [dbId])
+        return runQuery(selectUserByIdQuery, [dbId])
             .then((result) => {
                 return {
                     __tableName: tableName,
                     row: result?.rows[0]
                 };
-            });
-        return user
+            })
 
+    }
+    else if (tableName === 'posts') {
 
     }
 

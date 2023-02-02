@@ -30,3 +30,4 @@ export const userReducer = (result: any): NodeByIdReturnType => {
             __tableName: ''
         };
 }
+
