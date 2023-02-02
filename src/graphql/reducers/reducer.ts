@@ -5,9 +5,10 @@ export const queryResultReducer = (result: NodeByIdReturnType) => {
     let graphNode;
     if (result.__tableName === 'users') {
         graphNode = userReducer(result);
-    }
-    else if (result.__tableName === 'posts') {
+    } else if (result.__tableName === 'posts') {
         graphNode = postReducer(result)
+    } else if (result.__tableName === 'answers') {
+        graphNode = answerReducer(result)
     }
     return graphNode;
 }
@@ -52,3 +53,22 @@ export const postReducer = (result: any): NodeByIdReturnType => {
         };
 }
 
+export const answerReducer = (result: any): NodeByIdReturnType => {
+    return result ?
+        {
+            id: result.row.answer_id,
+            creationDate: result.row.creation_date,
+            userId: result.row.user_id,
+            postId: result.row.post_id,
+            body: result.row.body,
+            __tableName: result.__tableName
+        } :
+        {
+            id: '',
+            creationDate: '',
+            body: '',
+            title: '',
+            userId: '',
+            __tableName: ''
+        };
+}

@@ -13,6 +13,8 @@ export const resolver = {
                 return 'User';
             } else if (source.__tableName === 'posts') {
                 return 'Post'
+            } else if (source.__tableName === 'answers') {
+                return 'Answer'
             }
                 return null; // GraphQLError is thrown
         },

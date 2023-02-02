@@ -8,17 +8,20 @@ import {ApolloServerPluginDrainHttpServer} from "@apollo/server/plugin/drainHttp
 import {expressMiddleware} from "@apollo/server/express4";
 import pkg from 'body-parser';
 import {client, runQuery} from "./db_client/connectivity/connection";
+import {setSearchPathQuery} from "./db_client/queries/config/config";
 import {
     createUserTableQuery,
     insertDataInToUsersQuery,
+} from './db_client/queries/config/users';
+import {
     createPostTableQuery,
-    insertDataInToPostsQuery,
-    setSearchPathQuery
-} from "./db_client/queries/config";
+    insertDataInToPostsQuery
+} from "./db_client/queries/config/posts";
 import {schema} from "./graphql";
+import {createAnswerTableQuery, insertDataInToAnswersQuery} from "./db_client/queries/config/answers";
+
 
 const { json } = pkg;
-
 
 dotenv.config();
 
@@ -41,7 +44,7 @@ app.use(
     }),
 );
 
-await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+await new Promise<void>((resolve) => httpServer.listen({ port: port }, resolve));
 console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 
 // Connect to the PostgreSQL database
@@ -59,4 +62,9 @@ await runQuery(setSearchPathQuery);
 
 // await runQuery(createPostTableQuery);
 // await runQuery(insertDataInToPostsQuery);
+
+// answers table
+
+// await runQuery(createAnswerTableQuery);
+// await runQuery(insertDataInToAnswersQuery);
 

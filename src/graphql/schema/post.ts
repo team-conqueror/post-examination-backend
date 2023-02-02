@@ -1,4 +1,7 @@
 import {resolveId} from "../resolvers/resolvers";
+import {getAnswersForPostId, getNodeById} from "../../db_client/transactions/loaders";
+import {dbIdToNodeId} from "../../helpers/resolveId";
+import {queryResultReducer} from "../reducers/reducer";
 
 export const typeDef = `#graphql
 
@@ -8,6 +11,7 @@ export const typeDef = `#graphql
         body: String!
         title: String!
         userId: String!
+        answers: [Node]
     }
 
 `;
@@ -15,6 +19,12 @@ export const typeDef = `#graphql
 export const resolvers = {
 
     Post: {
-        id: resolveId
+        id: resolveId,
+        answers: async (source: any) => {
+            const answerRows = await getAnswersForPostId(source.id);
+            return answerRows.map((answerRow: any) => {
+                return queryResultReducer(answerRow)
+            });
+        }
     }
 };
