@@ -7,10 +7,9 @@ import * as http from "http";
 import {ApolloServerPluginDrainHttpServer} from "@apollo/server/plugin/drainHttpServer";
 import {expressMiddleware} from "@apollo/server/express4";
 import pkg from 'body-parser';
-import {schema} from "./graphql/schema/schema";
 import {client, runQuery} from "./db_client/connectivity/connection";
-import {createSchemaQuery, createTableQuery, insertDataQuery, setSearchPathQuery} from "./db_client/queries/config";
-import {selectDataQuery} from "./db_client/queries/read";
+import {setSearchPathQuery} from "./db_client/queries/config";
+import {schema} from "./graphql";
 
 const { json } = pkg;
 
