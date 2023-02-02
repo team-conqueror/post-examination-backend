@@ -25,18 +25,18 @@ export const resolvers = {
         answers: async (source: any) => {
             const answerRows = await getAnswersForPostId(source.id);
             return answerRows.map((answerRow: any) => {
-                return queryResultReducer(answerRow)
+                return queryResultReducer(answerRow);
             });
         },
         userId: (source: any) => dbIdToNodeId(source.userId, 'users'),
         comments: async (source: any) => {
             const commentRows = await getCommentsForPostId(source.id);
             return commentRows.map((commentRow: any) => {
-                return queryResultReducer(commentRow)
+                return queryResultReducer(commentRow);
             });
         },
         votes: async (source: any, _: any, contextValue: any) => {
-            return await getVoteCountForDocument('post', source.id)
+            return await getVoteCountForDocument('post', source.id);
         }
     }
 };

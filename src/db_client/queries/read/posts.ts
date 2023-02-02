@@ -2,7 +2,7 @@
  * Usage: defines db queries for posts table
  */
 
-export const selectAllDataQuery = {
+export const selectAllPostsQuery = {
     text: 'SELECT * FROM posts;',
 };
 
