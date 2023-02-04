@@ -106,6 +106,7 @@ export const createPost = async (postCreateInput: PostCreateInputType): Promise<
 
     const posts = await runQuery(createPostQuery, [postCreateInput.title, postCreateInput.body, userId]);
 
+    //ToDO: return the newly created post
 }
 
 
