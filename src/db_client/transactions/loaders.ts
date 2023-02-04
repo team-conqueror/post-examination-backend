@@ -7,6 +7,8 @@ import {selectAllDataQuery, selectUserByIdQuery} from "../queries/read/users";
 import {selectAnswerByIdQuery, selectAnswersByPostIdQuery} from "../queries/read/answers";
 import {selectCommentByIdQuery, selectCommentByPostIdQuery} from "../queries/read/comments";
 import {selectVoteTypeByDocumentIdQuery} from "../queries/read/votes";
+import {PostCreateInputType} from "../../types/graphql_types/input/post";
+import {createPostQuery} from "../queries/write/post";
 
 
 export const getNodeById = async (nodeId: string) => {
@@ -97,6 +99,16 @@ export const getAllPosts = async (): Promise<any> => {
         };
     });
 }
+
+export const createPost = async (postCreateInput: PostCreateInputType): Promise<any> => {
+
+    const userId = splitNodeId(postCreateInput.userId).dbId;
+
+    const posts = await runQuery(createPostQuery, [postCreateInput.title, postCreateInput.body, userId]);
+
+}
+
+
 export const getAllUsers = async (): Promise<QueryResult<UserType> | any> => {
 
     const users = await runQuery(selectAllDataQuery);
