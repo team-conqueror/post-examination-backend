@@ -9,6 +9,10 @@ import {expressMiddleware} from "@apollo/server/express4";
 import pkg from 'body-parser';
 import {client, runQuery} from "./db_client/connectivity/connection";
 import {setSearchPathQuery} from "./db_client/queries/config/config";
+import {schema} from "./graphql";
+import cors from 'cors';
+
+
 import {
     createUserTableQuery,
     insertDataInToUsersQuery,
@@ -17,7 +21,6 @@ import {
     createPostTableQuery,
     insertDataInToPostsQuery
 } from "./db_client/queries/config/posts";
-import {schema} from "./graphql";
 import {createAnswerTableQuery, insertDataInToAnswersQuery} from "./db_client/queries/config/answers";
 import {createCommentTableQuery, insertDataInToCommentsQuery} from "./db_client/queries/config/comments";
 import {
@@ -45,6 +48,7 @@ await server.start();
 app.use(
     '/graphql',
     json(),
+    cors<cors.CorsRequest>(),
     expressMiddleware(server, {
         context: async ({ req }) => ({ token: req.headers.token }),
     }),
