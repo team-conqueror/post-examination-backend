@@ -1,4 +1,4 @@
-import {NodeResolveType} from "../../types/graphql_types/node";
+import {NodeResolveType} from "../../../types/graphql_types/node";
 
 export const typeDef = `#graphql
 interface Node {

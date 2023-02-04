@@ -1,5 +1,5 @@
-import {resolveId} from "../resolvers/resolvers";
-import {dbIdToNodeId} from "../../helpers/resolveId";
+import {resolveId} from "../../resolvers/resolvers";
+import {dbIdToNodeId} from "../../../helpers/resolveId";
 
 export const typeDef = `#graphql
 
