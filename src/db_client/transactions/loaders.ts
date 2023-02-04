@@ -8,7 +8,11 @@ import {selectAnswerByIdQuery, selectAnswersByPostIdQuery} from "../queries/read
 import {selectCommentByIdQuery, selectCommentByPostIdQuery} from "../queries/read/comments";
 import {selectVoteTypeByDocumentIdQuery} from "../queries/read/votes";
 import {PostCreateInputType} from "../../types/graphql_types/input/post";
+import {CommentCreateInputType} from "../../types/graphql_types/input/comment";
 import {createPostQuery} from "../queries/write/post";
+import {createCommentQuery} from "../queries/write/comment";
+import {AnswerCreateInputType} from "../../types/graphql_types/input/answer";
+import {createAnswerQuery} from "../queries/write/answer";
 
 
 export const getNodeById = async (nodeId: string) => {
@@ -104,10 +108,30 @@ export const createPost = async (postCreateInput: PostCreateInputType): Promise<
 
     const userId = splitNodeId(postCreateInput.userId).dbId;
 
-    const posts = await runQuery(createPostQuery, [postCreateInput.title, postCreateInput.body, userId]);
+    const post = await runQuery(createPostQuery, [postCreateInput.title, postCreateInput.body, userId]);
 
+    //ToDo: return the newly created post
 }
 
+export const createComment = async (commentCreateInput: CommentCreateInputType): Promise<any> => {
+
+    const postId = splitNodeId(commentCreateInput.postId).dbId;
+    const userId = splitNodeId(commentCreateInput.userId).dbId;
+
+    const comment = await runQuery(createCommentQuery, [commentCreateInput.body, postId, userId]);
+
+    //ToDo: return the newly created comment
+}
+
+export const createAnswer = async (answerCreateInput: AnswerCreateInputType): Promise<any> => {
+
+    const postId = splitNodeId(answerCreateInput.postId).dbId;
+    const userId = splitNodeId(answerCreateInput.userId).dbId;
+
+    const answer = await runQuery(createAnswerQuery, [answerCreateInput.body, postId, userId]);
+
+    //ToDo: return the newly created answer
+}
 
 export const getAllUsers = async (): Promise<QueryResult<UserType> | any> => {
 
