@@ -1,4 +1,4 @@
-import {resolveId} from "../resolvers/resolvers";
+import {resolveId} from "../../resolvers/resolvers";
 
 export const typeDef = `#graphql
 
