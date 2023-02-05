@@ -1,18 +1,18 @@
-import {runQuery} from "../connectivity/connection";
-import {UserType} from "../../types/userType";
+import {runQuery} from "../connectivity/connection.js";
+import {UserType} from "../../types/userType.js";
 import {QueryResult} from "pg";
-import {splitNodeId} from "../../helpers/resolveId";
-import {selectAllPostsQuery, selectPostByIdQuery} from "../queries/read/posts";
-import {selectAllDataQuery, selectUserByIdQuery} from "../queries/read/users";
-import {selectAnswerByIdQuery, selectAnswersByPostIdQuery} from "../queries/read/answers";
-import {selectCommentByIdQuery, selectCommentByPostIdQuery} from "../queries/read/comments";
-import {selectVoteTypeByDocumentIdQuery} from "../queries/read/votes";
-import {PostCreateInputType} from "../../types/graphql_types/input/post";
-import {CommentCreateInputType} from "../../types/graphql_types/input/comment";
-import {createPostQuery} from "../queries/write/post";
-import {createCommentQuery} from "../queries/write/comment";
-import {AnswerCreateInputType} from "../../types/graphql_types/input/answer";
-import {createAnswerQuery} from "../queries/write/answer";
+import {splitNodeId} from "../../helpers/resolveId.js";
+import {selectAllPostsQuery, selectPostByIdQuery} from "../queries/read/posts.js";
+import {selectAllDataQuery, selectUserByIdQuery} from "../queries/read/users.js";
+import {selectAnswerByIdQuery, selectAnswersByPostIdQuery} from "../queries/read/answers.js";
+import {selectCommentByIdQuery, selectCommentByPostIdQuery} from "../queries/read/comments.js";
+import {selectVoteTypeByDocumentIdQuery} from "../queries/read/votes.js";
+import {PostCreateInputType} from "../../types/graphql_types/input/post.js";
+import {CommentCreateInputType} from "../../types/graphql_types/input/comment.js";
+import {createPostQuery} from "../queries/write/post.js";
+import {createCommentQuery} from "../queries/write/comment.js";
+import {AnswerCreateInputType} from "../../types/graphql_types/input/answer.js";
+import {createAnswerQuery} from "../queries/write/answer.js";
 
 
 export const getNodeById = async (nodeId: string) => {

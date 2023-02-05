@@ -1,7 +1,7 @@
-import {resolveId} from "../../resolvers/resolvers";
-import {getAnswersForPostId, getCommentsForPostId, getVoteCountForDocument} from "../../../db_client/transactions/loaders";
-import {dbIdToNodeId} from "../../../helpers/resolveId";
-import {queryResultReducer} from "../../reducers/reducer";
+import {resolveId} from "../../resolvers/resolvers.js";
+import {getAnswersForPostId, getCommentsForPostId, getVoteCountForDocument} from "../../../db_client/transactions/loaders.js";
+import {dbIdToNodeId} from "../../../helpers/resolveId.js";
+import {queryResultReducer} from "../../reducers/reducer.js";
 
 export const typeDef = `#graphql
 

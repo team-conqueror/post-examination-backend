@@ -7,9 +7,9 @@ import * as http from "http";
 import {ApolloServerPluginDrainHttpServer} from "@apollo/server/plugin/drainHttpServer";
 import {expressMiddleware} from "@apollo/server/express4";
 import pkg from 'body-parser';
-import {client, runQuery} from "./db_client/connectivity/connection";
-import {setSearchPathQuery} from "./db_client/queries/config/config";
-import {schema} from "./graphql";
+import {client, runQuery} from "./db_client/connectivity/connection.js";
+import {setSearchPathQuery} from "./db_client/queries/config/config.js";
+import {schema} from "./graphql/index.js";
 import cors from 'cors';
 
 
@@ -54,7 +54,7 @@ app.use(
     }),
 );
 
-await new Promise<void>((resolve) => httpServer.listen({ port: port }, resolve));
+await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
 console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 
 // Connect to the PostgreSQL database

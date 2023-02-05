@@ -1,5 +1,5 @@
-import {PostCreateInputType} from "../../../types/graphql_types/input/post";
-import {createPost} from "../../../db_client/transactions/loaders";
+import {PostCreateInputType} from "../../../types/graphql_types/input/post.js";
+import {createPost} from "../../../db_client/transactions/loaders.js";
 
 export const typeDef = `#graphql
 
