@@ -13,11 +13,12 @@ import {typeDef as Mutation, resolver as MutationResolver} from "./schema/mutati
 import {typeDef as PostCreate, resolver as PostCreateResolver} from "./schema/mutations/postCreate.js";
 import {typeDef as CommentCreate, resolver as CommentCreateResolver} from "./schema/mutations/commentCreate.js";
 import {typeDef as AnswerCreate, resolver as AnswerCreateResolver} from "./schema/mutations/answerCreate.js";
+import {typeDef as VoteCreate, resolver as VoteCreateResolver} from "./schema/mutations/voteCreate.js";
 
 
 
 const {merge} = pkg;
 export const schema = makeExecutableSchema({
-    typeDefs: [NodeInterface, Query, User, Post, Answer, Comment, BlogView, Mutation, PostCreate, CommentCreate, AnswerCreate],
-    resolvers: merge(NodeInterfaceResolver, QueryResolver, UserResolver, PostResolver, AnswerResolver, CommentResolver, BlogViewResolver, MutationResolver, PostCreateResolver, CommentCreateResolver, AnswerCreateResolver),
+    typeDefs: [NodeInterface, Query, User, Post, Answer, Comment, BlogView, Mutation, PostCreate, CommentCreate, AnswerCreate, VoteCreate],
+    resolvers: merge(NodeInterfaceResolver, QueryResolver, UserResolver, PostResolver, AnswerResolver, CommentResolver, BlogViewResolver, MutationResolver, PostCreateResolver, CommentCreateResolver, AnswerCreateResolver, VoteCreateResolver),
 });
