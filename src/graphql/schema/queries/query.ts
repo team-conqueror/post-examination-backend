@@ -1,5 +1,5 @@
-import {queryResultReducer} from "../../reducers/reducer";
-import {getNodeById} from "../../../db_client/transactions/loaders";
+import {queryResultReducer} from "../../reducers/reducer.js";
+import {getNodeById} from "../../../db_client/transactions/loaders.js";
 
 export const typeDef = `#graphql
     type Query {

@@ -1,5 +1,5 @@
-import {getAllPosts} from "../../../db_client/transactions/loaders";
-import {queryResultReducer} from "../../reducers/reducer";
+import {getAllPosts} from "../../../db_client/transactions/loaders.js";
+import {queryResultReducer} from "../../reducers/reducer.js";
 
 export const typeDef = `#graphql
     type BlogView {

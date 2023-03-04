@@ -1,6 +1,6 @@
-import {resolveId} from "../../resolvers/resolvers";
-import {getVoteCountForDocument} from "../../../db_client/transactions/loaders";
-import {dbIdToNodeId} from "../../../helpers/resolveId";
+import {resolveId} from "../../resolvers/resolvers.js";
+import {getVoteCountForDocument} from "../../../db_client/transactions/loaders.js";
+import {dbIdToNodeId} from "../../../helpers/resolveId.js";
 
 export const typeDef = `#graphql
 

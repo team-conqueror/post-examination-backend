@@ -1,22 +1,11 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ES2022"],
+    "module": "ES2022",
     "moduleResolution": "node",
-    "pretty": true,
-    "sourceMap": true,
-    "lib": ["es2020"],
-    "target": "es2020",
-    "module": "esnext",
-    "allowJs": true,
-    "outDir": "build",
-    "rootDir": "src",
-    "types": ["node"],
-    "typeRoots" : ["./node_modules/@types", "./src/@types"],
-    "strict": true,
-    "noImplicitAny": true,
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true
+    "target": "ES2022",
+    "outDir": "build"
   },
   "ts-node": {
     "experimentalSpecifierResolution": "node"

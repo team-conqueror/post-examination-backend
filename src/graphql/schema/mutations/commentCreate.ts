@@ -1,5 +1,5 @@
-import {createComment} from "../../../db_client/transactions/loaders";
-import {CommentCreateInputType} from "../../../types/graphql_types/input/comment";
+import {createComment} from "../../../db_client/transactions/loaders.js";
+import {CommentCreateInputType} from "../../../types/graphql_types/input/comment.js";
 
 export const typeDef = `#graphql
 
