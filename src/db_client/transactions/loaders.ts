@@ -157,29 +157,13 @@ export const createVote = async (voteCreateInput: VoteCreateInputType): Promise<
     const userVote = await checkUserForDocumentVote(voteCreateInput.userId, voteCreateInput.documentType, voteCreateInput.documentId);
 
     if (userVote) {
-        console.log(userVote)
-
-        // ToDo: check for new request's vote type; if both vote types are same remove the record, or alter the vote type
-
         if (doesUserVoteTypeMatch(userVote.vote_type, voteCreateInput.voteType)) {
-            // ToDo: remove the record
-
             await runQuery(removeUserVoteForDocumentIdQuery, [voteCreateInput.userId, voteCreateInput.documentType, voteCreateInput.documentId]);
-            console.log('removed ')
         } else {
-            // ToDo: update the record
-
             await runQuery(alterUserVoteForDocumentIdQuery, [voteCreateInput.voteType, voteCreateInput.userId, voteCreateInput.documentType, voteCreateInput.documentId])
-            console.log('altered')
         }
     } else {
-        console.log(`no votes ${userVote}`)
-
-        // ToDo: create vote type for the user_id for the document_id
-
         await runQuery(createVoteForDocumentIdQuery, [voteCreateInput.voteType, voteCreateInput.documentType, voteCreateInput.documentId, voteCreateInput.userId])
-        console.log('created new')
-
     }
 
 }
