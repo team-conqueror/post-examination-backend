@@ -2,7 +2,7 @@
   "restartable": "rs",
   "ignore": [".git", "node_modules/", "build/", "coverage/"],
   "watch": ["src/"],
-  "exec": "ts-node-esm ./src/index.ts",
+  "exec": "npm run build && node build/index.js",
   "env": {
     "NODE_ENV": "development"
   },
