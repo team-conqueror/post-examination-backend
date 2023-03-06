@@ -27,7 +27,7 @@ import {
     createVoteTableEnumsQuery,
     createVoteTableQuery,
     insertDataInToVotesQuery
-} from "./db_client/queries/config/votes";
+} from "./db_client/queries/config/votes.js";
 
 
 const { json } = pkg;

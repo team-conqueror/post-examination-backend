@@ -7,7 +7,7 @@
 export const createVoteTableEnumsQuery = {
     text: `
     CREATE TYPE vote_type AS ENUM ('up_vote', 'down_vote');
-    CREATE TYPE document_type AS ENUM ('post', 'answer');
+    CREATE TYPE document_type AS ENUM ('posts', 'answers');
   `,
 }
 // create table votes
@@ -28,6 +28,6 @@ export const createVoteTableQuery = {
 export const insertDataInToVotesQuery = {
     text: `
     INSERT INTO votes (vote_type, document_type, document_id, user_id)
-    VALUES ('up_vote', 'post', '1', 'SE/2017/034')
+    VALUES ('up_vote', 'posts', '1', 'SE/2017/034')
     `
 };
