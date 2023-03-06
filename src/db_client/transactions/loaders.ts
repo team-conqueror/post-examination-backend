@@ -153,17 +153,23 @@ export const doesUserVoteTypeMatch = (dbVoteType: string, newVoteType: string): 
     return dbVoteType === newVoteType
 }
 export const createVote = async (voteCreateInput: VoteCreateInputType): Promise<any> => {
+    const userId = splitNodeId(voteCreateInput.userId).dbId;
 
-    const userVote = await checkUserForDocumentVote(voteCreateInput.userId, voteCreateInput.documentType, voteCreateInput.documentId);
+    const {tableName: documentType, dbId: documentId} = splitNodeId(voteCreateInput.documentId);
+
+    const userVote = await checkUserForDocumentVote(userId, documentType, documentId);
 
     if (userVote) {
         if (doesUserVoteTypeMatch(userVote.vote_type, voteCreateInput.voteType)) {
-            await runQuery(removeUserVoteForDocumentIdQuery, [voteCreateInput.userId, voteCreateInput.documentType, voteCreateInput.documentId]);
+            await runQuery(removeUserVoteForDocumentIdQuery, [userId, documentType, documentId]);
+            return await getVoteCountForDocument(documentType, documentId);
         } else {
-            await runQuery(alterUserVoteForDocumentIdQuery, [voteCreateInput.voteType, voteCreateInput.userId, voteCreateInput.documentType, voteCreateInput.documentId])
+            await runQuery(alterUserVoteForDocumentIdQuery, [voteCreateInput.voteType, userId, documentType, documentId]);
+            return await getVoteCountForDocument(documentType, documentId);
         }
     } else {
-        await runQuery(createVoteForDocumentIdQuery, [voteCreateInput.voteType, voteCreateInput.documentType, voteCreateInput.documentId, voteCreateInput.userId])
+        await runQuery(createVoteForDocumentIdQuery, [voteCreateInput.voteType, documentType, documentId, userId]);
+        return await getVoteCountForDocument(documentType, documentId);
     }
 
 }

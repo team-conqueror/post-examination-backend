@@ -5,13 +5,12 @@ export const typeDef = `#graphql
 
     input VoteCreateInputType {
         documentId: String!
-        documentType: String!
         userId: String!
         voteType: String!
     }
     
     extend type Mutation {
-        createVote(voteCreateInput: VoteCreateInputType!): Node
+        createVote(voteCreateInput: VoteCreateInputType!): Int!
     }
 
 `;

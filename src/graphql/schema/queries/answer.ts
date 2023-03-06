@@ -22,7 +22,7 @@ export const resolvers = {
         userId: (source: any) => dbIdToNodeId(source.userId, 'users'),
         postId: (source: any) => dbIdToNodeId(source.postId, 'posts'),
         votes: async (source: any) => {
-            return await getVoteCountForDocument('answer', source.id)
+            return await getVoteCountForDocument('answers', source.id)
         }
     }
 };

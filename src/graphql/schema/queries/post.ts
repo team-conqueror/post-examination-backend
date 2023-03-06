@@ -36,7 +36,7 @@ export const resolvers = {
             });
         },
         votes: async (source: any, _: any, contextValue: any) => {
-            return await getVoteCountForDocument('post', source.id);
+            return await getVoteCountForDocument('posts', source.id);
         }
     }
 };
