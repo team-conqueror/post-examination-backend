@@ -1,6 +1,6 @@
 import {resolveId} from "../../resolvers/resolvers.js";
-import {getVoteCountForDocument} from "../../../db_client/transactions/loaders.js";
-import {dbIdToNodeId} from "../../../helpers/resolveId.js";
+import {checkUserForDocumentVote, getVoteCountForDocument} from "../../../db_client/transactions/loaders.js";
+import {dbIdToNodeId, splitNodeId} from "../../../helpers/resolveId.js";
 
 export const typeDef = `#graphql
 
@@ -11,6 +11,7 @@ export const typeDef = `#graphql
         postId: String!
         body: String!
         votes: Int!
+        currentUserVote: UserVote
     }
 
 `;
@@ -23,6 +24,11 @@ export const resolvers = {
         postId: (source: any) => dbIdToNodeId(source.postId, 'posts'),
         votes: async (source: any) => {
             return await getVoteCountForDocument('answers', source.id)
+        },
+        currentUserVote: async (source: any, _: any, context: any) => {
+            const userId = splitNodeId(context.token).dbId;
+            const userVote = await checkUserForDocumentVote(userId, 'answers', source.id);
+            return userVote ? userVote.vote_type : null;
         }
     }
 };

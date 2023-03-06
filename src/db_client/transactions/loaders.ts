@@ -99,6 +99,9 @@ export const getVoteCountForDocument = async (documentType: string, documentId: 
 
 }
 
+export const getCurrentUserVoteForDocument = async (): Promise<any> => {
+
+}
 
 export const getAllPosts = async (): Promise<any> => {
     const posts = await runQuery(selectAllPostsQuery)
@@ -152,6 +155,7 @@ export const checkUserForDocumentVote = async (userId: string, documentType: str
 export const doesUserVoteTypeMatch = (dbVoteType: string, newVoteType: string): boolean => {
     return dbVoteType === newVoteType
 }
+
 export const createVote = async (voteCreateInput: VoteCreateInputType): Promise<any> => {
     const userId = splitNodeId(voteCreateInput.userId).dbId;
 
