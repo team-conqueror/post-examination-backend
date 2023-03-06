@@ -1,6 +1,11 @@
 import {resolveId} from "../../resolvers/resolvers.js";
-import {getAnswersForPostId, getCommentsForPostId, getVoteCountForDocument} from "../../../db_client/transactions/loaders.js";
-import {dbIdToNodeId} from "../../../helpers/resolveId.js";
+import {
+    checkUserForDocumentVote,
+    getAnswersForPostId,
+    getCommentsForPostId,
+    getVoteCountForDocument
+} from "../../../db_client/transactions/loaders.js";
+import {dbIdToNodeId, splitNodeId} from "../../../helpers/resolveId.js";
 import {queryResultReducer} from "../../reducers/reducer.js";
 
 export const typeDef = `#graphql
@@ -14,6 +19,7 @@ export const typeDef = `#graphql
         answers: [Node]
         comments: [Node]
         votes: Int!
+        currentUserVote: UserVote
     }
 
 `;
@@ -37,6 +43,11 @@ export const resolvers = {
         },
         votes: async (source: any, _: any, contextValue: any) => {
             return await getVoteCountForDocument('posts', source.id);
+        },
+        currentUserVote: async (source: any, _: any, context: any) => {
+            const userId = splitNodeId(context.token).dbId;
+            const userVote = await checkUserForDocumentVote(userId, 'posts', source.id);
+            return userVote ? userVote.vote_type : null;
         }
     }
 };
