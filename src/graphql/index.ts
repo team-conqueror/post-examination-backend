@@ -17,9 +17,13 @@ import {typeDef as VoteCreate, resolver as VoteCreateResolver} from "./schema/mu
 
 import {typeDef as UserVoteEnum} from "./schema/enums/userVote.js";
 
+import {typeDef as UserLogin, resolver as UserLoginResolver} from "./schema/queries/login.js";
+import {typeDef as UserRegister, resolver as UserRegisterResolver} from "./schema/mutations/register.js";
+
+
 
 const {merge} = pkg;
 export const schema = makeExecutableSchema({
-    typeDefs: [NodeInterface, Query, User, Post, Answer, Comment, BlogView, Mutation, PostCreate, CommentCreate, AnswerCreate, VoteCreate, UserVoteEnum],
-    resolvers: merge(NodeInterfaceResolver, QueryResolver, UserResolver, PostResolver, AnswerResolver, CommentResolver, BlogViewResolver, MutationResolver, PostCreateResolver, CommentCreateResolver, AnswerCreateResolver, VoteCreateResolver),
+    typeDefs: [NodeInterface, Query, User, Post, Answer, Comment, BlogView, Mutation, PostCreate, CommentCreate, AnswerCreate, VoteCreate, UserVoteEnum, UserLogin, UserRegister],
+    resolvers: merge(NodeInterfaceResolver, QueryResolver, UserResolver, PostResolver, AnswerResolver, CommentResolver, BlogViewResolver, MutationResolver, PostCreateResolver, CommentCreateResolver, AnswerCreateResolver, VoteCreateResolver, UserLoginResolver, UserRegisterResolver),
 });

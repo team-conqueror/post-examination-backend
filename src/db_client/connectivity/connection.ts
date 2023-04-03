@@ -4,10 +4,10 @@ const { Client } = pkg;
 
 export const client = new Client({
     user: 'neminda',
-    database: 'testdbnm',
-    password: 'mypassword',
+    database: 'post_examination_db',
+    password: 'postexamination',
     port: 5432,
-    host: '172.17.0.2',
+    host: process.env.DATABASE_HOST_URL,
 });
 
 

@@ -7,6 +7,7 @@ import {
 } from "../../../db_client/transactions/loaders.js";
 import {dbIdToNodeId, splitNodeId} from "../../../helpers/resolveId.js";
 import {queryResultReducer} from "../../reducers/reducer.js";
+import {getUserDetails} from "../../../service/getUserDetails.js";
 
 export const typeDef = `#graphql
 
@@ -45,7 +46,10 @@ export const resolvers = {
             return await getVoteCountForDocument('posts', source.id);
         },
         currentUserVote: async (source: any, _: any, context: any) => {
-            const userId = splitNodeId(context.token).dbId;
+            const response = await getUserDetails(context);
+            const user: any = await response.json();
+
+            const userId = user.user.user._id;
             const userVote = await checkUserForDocumentVote(userId, 'posts', source.id);
             return userVote ? userVote.vote_type : null;
         }

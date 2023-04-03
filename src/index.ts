@@ -8,7 +8,7 @@ import {ApolloServerPluginDrainHttpServer} from "@apollo/server/plugin/drainHttp
 import {expressMiddleware} from "@apollo/server/express4";
 import pkg from 'body-parser';
 import {client, runQuery} from "./db_client/connectivity/connection.js";
-import {setSearchPathQuery} from "./db_client/queries/config/config.js";
+import {createSchemaQuery, setSearchPathQuery} from "./db_client/queries/config/config.js";
 import {schema} from "./graphql/index.js";
 import cors from 'cors';
 
@@ -16,13 +16,13 @@ import cors from 'cors';
 import {
     createUserTableQuery,
     insertDataInToUsersQuery,
-} from './db_client/queries/config/users';
+} from './db_client/queries/config/users.js';
 import {
     createPostTableQuery,
     insertDataInToPostsQuery
-} from "./db_client/queries/config/posts";
-import {createAnswerTableQuery, insertDataInToAnswersQuery} from "./db_client/queries/config/answers";
-import {createCommentTableQuery, insertDataInToCommentsQuery} from "./db_client/queries/config/comments";
+} from "./db_client/queries/config/posts.js";
+import {createAnswerTableQuery, insertDataInToAnswersQuery} from "./db_client/queries/config/answers.js";
+import {createCommentTableQuery, insertDataInToCommentsQuery} from "./db_client/queries/config/comments.js";
 import {
     createVoteTableEnumsQuery,
     createVoteTableQuery,
@@ -33,8 +33,6 @@ import {
 const { json } = pkg;
 
 dotenv.config();
-
-const port: number = Number(process.env.PORT);
 
 const app = express();
 const httpServer = http.createServer(app);

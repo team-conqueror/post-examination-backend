@@ -19,6 +19,8 @@ import {
     createVoteForDocumentIdQuery,
     removeUserVoteForDocumentIdQuery
 } from "../queries/write/vote.js";
+import {UserCreateInputType} from "../../types/graphql_types/input/user.js";
+import {createUserQuery} from "../queries/write/users.js";
 
 
 export const getNodeById = async (nodeId: string) => {
@@ -142,6 +144,11 @@ export const createAnswer = async (answerCreateInput: AnswerCreateInputType): Pr
     //ToDo: return the newly created answer
 }
 
+export const createUser = async (userCreateInput: UserCreateInputType): Promise<any> => {
+    const user:any = await runQuery(createUserQuery, [userCreateInput.displayName, userCreateInput.email, userCreateInput.userId]);
+    return user.rowCount;
+    //ToDo: return the newly created user
+}
 
 export const checkUserForDocumentVote = async (userId: string, documentType: string, documentId: string): Promise<any> => {
 

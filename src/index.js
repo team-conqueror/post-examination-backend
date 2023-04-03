@@ -1,0 +1,46 @@
+import dotenv from 'dotenv';
+import { ApolloServer } from '@apollo/server';
+import express from 'express';
+import * as http from "http";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import { expressMiddleware } from "@apollo/server/express4";
+import pkg from 'body-parser';
+import { client, runQuery } from "./db_client/connectivity/connection";
+import { setSearchPathQuery } from "./db_client/queries/config/config";
+import { schema } from "./graphql";
+import cors from 'cors';
+const { json } = pkg;
+dotenv.config();
+const port = Number(process.env.PORT);
+const app = express();
+const httpServer = http.createServer(app);
+const server = new ApolloServer({
+    schema,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+});
+await server.start();
+app.use('/graphql', json(), cors(), expressMiddleware(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
+}));
+await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+// Connect to the PostgreSQL database
+await client.connect();
+// await runQuery(createSchemaQuery);
+await runQuery(setSearchPathQuery);
+// users table
+// await runQuery(createUserTableQuery);
+// await runQuery(insertDataInToUsersQuery);
+// posts table
+// await runQuery(createPostTableQuery);
+// await runQuery(insertDataInToPostsQuery);
+// answers table
+// await runQuery(createAnswerTableQuery);
+// await runQuery(insertDataInToAnswersQuery);
+// comments table
+// await runQuery(createCommentTableQuery);
+// await runQuery(insertDataInToCommentsQuery);
+// votes table
+// await runQuery(createVoteTableEnumsQuery);
+// await runQuery(createVoteTableQuery);
+// await runQuery(insertDataInToVotesQuery);

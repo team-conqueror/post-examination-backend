@@ -1,5 +1,4 @@
-import {resolveId} from "../../resolvers/resolvers.js";
-
+import { resolveId } from "../../resolvers/resolvers";
 export const typeDef = `#graphql
 
     type User implements Node {
@@ -11,16 +10,8 @@ export const typeDef = `#graphql
     }
  
 `;
-
 export const resolvers = {
-
     User: {
-        id: resolveId,
-        userId: (source: any) => {
-            return resolveId({
-                ...source,
-                id: source.userId,
-            })
-        }
+        id: resolveId
     }
 };
